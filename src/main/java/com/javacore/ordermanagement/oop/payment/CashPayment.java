@@ -2,7 +2,7 @@ package com.javacore.ordermanagement.oop.payment;
 
 import java.math.BigDecimal;
 
-/** Thanh toan tien mat: luon thanh cong ngay lap tuc (don gian hoa cho muc dich hoc tap). */
+/** Thanh toán tiền mặt: luôn thành công ngay lập tức (đơn giản hóa cho mục đích học tập). */
 public class CashPayment implements PaymentMethod {
 
     @Override

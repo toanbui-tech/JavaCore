@@ -4,13 +4,13 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 /**
- * KE THUA + OVERRIDE: VipCustomer cung "la mot" Customer nhung ghi de
- * (override) calculateDiscount() de tra ve mot ket qua khac hoan toan voi
- * RegularCustomer -> chinh la bieu hien ro nhat cua DA HINH (polymorphism).
+ * KẾ THỪA + OVERRIDE: VipCustomer cũng "là một" Customer nhưng ghi đè
+ * (override) calculateDiscount() để trả về một kết quả khác hoàn toàn với
+ * RegularCustomer -> chính là biểu hiện rõ nhất của ĐA HÌNH (polymorphism).
  */
 public class VipCustomer extends Customer {
 
-    private static final BigDecimal DISCOUNT_RATE = new BigDecimal("0.10"); // VIP giam 10%
+    private static final BigDecimal DISCOUNT_RATE = new BigDecimal("0.10"); // VIP giảm 10%
 
     public VipCustomer(String id, String name, String email) {
         super(id, name, email);

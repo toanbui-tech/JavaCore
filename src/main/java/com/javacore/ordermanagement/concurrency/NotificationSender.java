@@ -1,24 +1,24 @@
 package com.javacore.ordermanagement.concurrency;
 
 /**
- * DA LUONG CO BAN - Thread & Runnable (muc thap nhat).
+ * ĐA LUỒNG CƠ BẢN - Thread & Runnable (mức thấp nhất).
  * <p>
- * Gui thong bao (email/sms gia lap) la mot tac vu I/O co do tre, khong nen
- * lam chan (block) luong chinh dang xu ly don hang. Cach don gian nhat la
- * tao 1 Thread moi cho moi thong bao va goi start().
+ * Gửi thông báo (email/sms giả lập) là một tác vụ I/O có độ trễ, không nên
+ * làm chặn (block) luồng chính đang xử lý đơn hàng. Cách đơn giản nhất là
+ * tạo 1 Thread mới cho mỗi thông báo và gọi start().
  * <p>
- * Han che cua cach nay: moi lan goi la mot Thread MOI hoan toan (tao/huy
- * thread rat ton kem) - xem concurrency.OrderBatchProcessor de biet cach
- * lam tot hon voi ExecutorService khi can xu ly NHIEU tac vu.
+ * Hạn chế của cách này: mỗi lần gọi là một Thread MỚI hoàn toàn (tạo/hủy
+ * thread rất tốn kém) - xem concurrency.OrderBatchProcessor để biết cách
+ * làm tốt hơn với ExecutorService khi cần xử lý NHIỀU tác vụ.
  */
 public class NotificationSender {
 
     public void sendAsync(String recipientEmail, String message) {
         Runnable task = () -> {
             try {
-                Thread.sleep(200); // gia lap do tre goi API gui email/sms
+                Thread.sleep(200); // giả lập độ trễ gọi API gửi email/sms
             } catch (InterruptedException e) {
-                Thread.currentThread().interrupt(); // khoi phuc interrupt flag - thuc hanh chuan khi bat InterruptedException
+                Thread.currentThread().interrupt(); // khôi phục interrupt flag - thực hành chuẩn khi bắt InterruptedException
                 return;
             }
             System.out.printf("[%s] Da gui thong bao toi %s: %s%n",

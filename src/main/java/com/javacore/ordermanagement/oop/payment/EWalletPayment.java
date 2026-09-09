@@ -2,7 +2,7 @@ package com.javacore.ordermanagement.oop.payment;
 
 import java.math.BigDecimal;
 
-/** Thanh toan vi dien tu: gia lap so du vi. */
+/** Thanh toán ví điện tử: giả lập số dư ví. */
 public class EWalletPayment implements PaymentMethod {
 
     private BigDecimal balance;

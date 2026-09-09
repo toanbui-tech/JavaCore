@@ -24,10 +24,10 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
- * UNIT TEST CO BAN VOI JUNIT.
+ * UNIT TEST CƠ BẢN VỚI JUNIT.
  * <p>
- * Moi test chi kiem tra MOT hanh vi cu the (Arrange - Act - Assert), doc lap
- * voi cac test khac (moi @Test chay tren du lieu moi tinh nho @BeforeEach).
+ * Mỗi test chỉ kiểm tra MỘT hành vi cụ thể (Arrange - Act - Assert), độc lập
+ * với các test khác (mỗi @Test chạy trên dữ liệu mới tinh nhờ @BeforeEach).
  */
 class OrderServiceTest {
 

@@ -4,14 +4,14 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * GENERICS: <T, ID> la kieu du lieu tham so hoa (type parameter). Cung mot
- * interface Repository nay co the dung cho Product (ID=String), Customer
- * (ID=String), Order (ID=String)... ma khong can viet lai code, va van duoc
- * kiem tra kieu du lieu (type-safe) o thoi diem bien dich thay vi phai ep
- * kieu (cast) thu cong nhu khi dung Object.
+ * GENERICS: <T, ID> là kiểu dữ liệu tham số hóa (type parameter). Cùng một
+ * interface Repository này có thể dùng cho Product (ID=String), Customer
+ * (ID=String), Order (ID=String)... mà không cần viết lại code, và vẫn được
+ * kiểm tra kiểu dữ liệu (type-safe) ở thời điểm biên dịch thay vì phải ép
+ * kiểu (cast) thủ công như khi dùng Object.
  *
- * @param <T>  kieu cua entity duoc luu tru
- * @param <ID> kieu cua khoa chinh (id) dung de tra cuu
+ * @param <T>  kiểu của entity được lưu trữ
+ * @param <ID> kiểu của khóa chính (id) dùng để tra cứu
  */
 public interface Repository<T, ID> {
 

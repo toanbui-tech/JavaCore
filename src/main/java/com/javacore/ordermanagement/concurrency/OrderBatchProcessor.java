@@ -14,19 +14,19 @@ import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
 /**
- * DA LUONG - ExecutorService + Callable + Future.
+ * ĐA LUỒNG - ExecutorService + Callable + Future.
  * <p>
- * Tinh huong thuc te: cuoi ngay he thong can "chot don" (checkout) hang loat
- * don dang PENDING cung luc, thay vi xu ly tuan tu tung don mot. Dung mot
- * THREAD POOL co dinh de gioi han so luong thread chay song song (tranh tao
- * qua nhieu thread lam qua tai he thong), va Callable&lt;Order&gt; (khac
- * Runnable o cho CO GIA TRI TRA VE va co the nem checked exception).
+ * Tình huống thực tế: cuối ngày hệ thống cần "chốt đơn" (checkout) hàng loạt
+ * đơn đang PENDING cùng lúc, thay vì xử lý tuần tự từng đơn một. Dùng một
+ * THREAD POOL cố định để giới hạn số lượng thread chạy song song (tránh tạo
+ * quá nhiều thread làm quá tải hệ thống), và Callable&lt;Order&gt; (khác
+ * Runnable ở chỗ CÓ GIÁ TRỊ TRẢ VỀ và có thể ném checked exception).
  * <p>
- * THREAD-SAFETY: nhieu thread co the cung reduceStock()/restock() tren CUNG
- * MOT Product (vi du 2 don khac nhau mua chung 1 san pham) - do do
- * Product#reduceStock/restock duoc khai bao synchronized (xem Product.java)
- * de tranh "lost update" (2 thread cung doc gia tri ton kho cu, cung ghi de
- * len nhau).
+ * THREAD-SAFETY: nhiều thread có thể cùng reduceStock()/restock() trên CÙNG
+ * MỘT Product (ví dụ 2 đơn khác nhau mua chung 1 sản phẩm) - do đó
+ * Product#reduceStock/restock được khai báo synchronized (xem Product.java)
+ * để tránh "lost update" (2 thread cùng đọc giá trị tồn kho cũ, cùng ghi đè
+ * lên nhau).
  */
 public class OrderBatchProcessor {
 
@@ -37,8 +37,8 @@ public class OrderBatchProcessor {
     }
 
     /**
-     * Xu ly (checkout) danh sach don hang SONG SONG bang mot thread pool co
-     * kich thuoc co dinh, cho toi khi tat ca hoan tat roi tra ve ket qua.
+     * Xử lý (checkout) danh sách đơn hàng SONG SONG bằng một thread pool có
+     * kích thước cố định, chờ tới khi tất cả hoàn tất rồi trả về kết quả.
      */
     public List<Order> processBatch(List<Order> orders, PaymentMethod paymentMethod, int threadPoolSize) {
         ExecutorService executor = Executors.newFixedThreadPool(threadPoolSize);
@@ -48,7 +48,7 @@ public class OrderBatchProcessor {
                     .<Callable<Order>>map(order -> () -> orderService.checkout(order, paymentMethod))
                     .toList();
 
-            // invokeAll: gui tat ca task vao pool, block cho den khi TAT CA hoan tat.
+            // invokeAll: gửi tất cả task vào pool, block cho đến khi TẤT CẢ hoàn tất.
             List<Future<Order>> futures = executor.invokeAll(tasks);
 
             for (Future<Order> future : futures) {

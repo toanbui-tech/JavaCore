@@ -10,12 +10,12 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Order phoi hop nhieu class khac (Customer, OrderItem) -> the hien
- * COMPOSITION ("has-a"): mot Order CO mot Customer va CO NHIEU OrderItem,
- * khac voi quan he "is-a" cua ke thua.
+ * Order phối hợp nhiều class khác (Customer, OrderItem) -> thể hiện
+ * COMPOSITION ("has-a"): một Order CÓ một Customer và CÓ NHIỀU OrderItem,
+ * khác với quan hệ "is-a" của kế thừa.
  * <p>
- * Order cung IMPLEMENTS Comparable&lt;Order&gt; de co the sap xep/uu tien
- * trong hang doi (xem collections.OrderQueueManager dung PriorityQueue).
+ * Order cũng IMPLEMENTS Comparable&lt;Order&gt; để có thể sắp xếp/ưu tiên
+ * trong hàng đợi (xem collections.OrderQueueManager dùng PriorityQueue).
  */
 public class Order implements Comparable<Order> {
 
@@ -36,7 +36,7 @@ public class Order implements Comparable<Order> {
         items.add(item);
     }
 
-    /** ENCAPSULATION: tra ve unmodifiable view -> ben ngoai khong the them/xoa truc tiep vao list noi bo. */
+    /** ENCAPSULATION: trả về unmodifiable view -> bên ngoài không thể thêm/xóa trực tiếp vào list nội bộ. */
     public List<OrderItem> getItems() {
         return Collections.unmodifiableList(items);
     }
@@ -71,7 +71,7 @@ public class Order implements Comparable<Order> {
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 
-    /** POLYMORPHISM: goi customer.calculateDiscount() - ket qua phu thuoc vao loai Customer thuc su luc runtime. */
+    /** POLYMORPHISM: gọi customer.calculateDiscount() - kết quả phụ thuộc vào loại Customer thực sự lúc runtime. */
     public BigDecimal getTotal() {
         BigDecimal subtotal = getSubtotal();
         BigDecimal discount = customer.calculateDiscount(subtotal);
@@ -79,8 +79,8 @@ public class Order implements Comparable<Order> {
     }
 
     /**
-     * Thu tu uu tien: don cua khach VIP xu ly truoc, cung hang thi don tao
-     * som hon xu ly truoc (FIFO trong cung nhom uu tien).
+     * Thứ tự ưu tiên: đơn của khách VIP xử lý trước, cùng hạng thì đơn tạo
+     * sớm hơn xử lý trước (FIFO trong cùng nhóm ưu tiên).
      */
     @Override
     public int compareTo(Order other) {

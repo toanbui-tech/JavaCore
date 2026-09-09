@@ -9,15 +9,15 @@ import java.util.Queue;
 /**
  * COLLECTIONS FRAMEWORK - Queue:
  * <p>
- * Bai toan thuc te: don hang can duoc xep hang cho xu ly (giong quay
- * thanh toan sieu thi), nhung khach VIP nen duoc uu tien xu ly truoc.
+ * Bài toán thực tế: đơn hàng cần được xếp hàng chờ xử lý (giống quầy
+ * thanh toán siêu thị), nhưng khách VIP nên được ưu tiên xử lý trước.
  * <ul>
- *   <li>{@code Queue<Order>} (LinkedList) : hang doi FIFO don gian - dung khi
- *       moi don duoc doi xu ngang nhau, ai den truoc xu ly truoc.</li>
- *   <li>{@code PriorityQueue<Order>} : hang doi CO UU TIEN, tu dong sap xep
- *       phan tu theo Order#compareTo (VIP truoc, cung hang thi FIFO). Dung
- *       khi thu tu xu ly phu thuoc vao mot tieu chi nghiep vu chu khong chi
- *       don thuan la thoi gian den.</li>
+ *   <li>{@code Queue<Order>} (LinkedList) : hàng đợi FIFO đơn giản - dùng khi
+ *       mọi đơn được đối xử ngang nhau, ai đến trước xử lý trước.</li>
+ *   <li>{@code PriorityQueue<Order>} : hàng đợi CÓ ƯU TIÊN, tự động sắp xếp
+ *       phần tử theo Order#compareTo (VIP trước, cùng hạng thì FIFO). Dùng
+ *       khi thứ tự xử lý phụ thuộc vào một tiêu chí nghiệp vụ chứ không chỉ
+ *       đơn thuần là thời gian đến.</li>
  * </ul>
  */
 public class OrderQueueManager {
@@ -37,7 +37,7 @@ public class OrderQueueManager {
         priorityQueue.offer(order);
     }
 
-    /** Luon tra ve don co uu tien cao nhat (VIP truoc, sau do theo thoi gian tao). */
+    /** Luôn trả về đơn có ưu tiên cao nhất (VIP trước, sau đó theo thời gian tạo). */
     public Order pollByPriority() {
         return priorityQueue.poll();
     }

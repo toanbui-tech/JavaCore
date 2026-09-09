@@ -9,17 +9,17 @@ import java.util.Set;
 import java.util.TreeSet;
 
 /**
- * COLLECTIONS FRAMEWORK - chon dung loai collection cho tung nhu cau:
+ * COLLECTIONS FRAMEWORK - chọn đúng loại collection cho từng nhu cầu:
  * <ul>
- *   <li>{@code Map<String, Product>} : tra cuu san pham theo id voi do phuc
- *       tap O(1) trung binh - phu hop khi can lookup lien tuc theo khoa.</li>
- *   <li>{@code Set<String>} (TreeSet) : luu danh sach TEN DANH MUC (category)
- *       KHONG TRUNG LAP va TU DONG SAP XEP theo alphabet - Set la lua chon
- *       tu nhien khi thu tu chen khong quan trong nhung tinh duy nhat thi co.</li>
+ *   <li>{@code Map<String, Product>} : tra cứu sản phẩm theo id với độ phức
+ *       tạp O(1) trung bình - phù hợp khi cần lookup liên tục theo khóa.</li>
+ *   <li>{@code Set<String>} (TreeSet) : lưu danh sách TÊN DANH MỤC (category)
+ *       KHÔNG TRÙNG LẶP và TỰ ĐỘNG SẮP XẾP theo alphabet - Set là lựa chọn
+ *       tự nhiên khi thứ tự chèn không quan trọng nhưng tính duy nhất thì có.</li>
  * </ul>
- * Day la lop rieng, tach biet voi generics.ProductRepository, de nguoi doc
- * de dang so sanh: repository (generic, tai su dung cho moi entity) vs.
- * catalog (chuyen biet, minh hoa cach chon collection phu hop tung bai toan).
+ * Đây là lớp riêng, tách biệt với generics.ProductRepository, để người đọc
+ * dễ dàng so sánh: repository (generic, tái sử dụng cho mọi entity) vs.
+ * catalog (chuyên biệt, minh họa cách chọn collection phù hợp từng bài toán).
  */
 public class ProductCatalog {
 
@@ -35,7 +35,7 @@ public class ProductCatalog {
         return productsById.get(id);
     }
 
-    /** Danh sach danh muc, khong trung lap, da sap xep - nho dung TreeSet. */
+    /** Danh sách danh mục, không trùng lặp, đã sắp xếp - nhờ dùng TreeSet. */
     public Set<String> getCategories() {
         return Collections.unmodifiableSet(categories);
     }

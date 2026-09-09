@@ -3,10 +3,10 @@ package com.javacore.ordermanagement.exception;
 /**
  * UNCHECKED EXCEPTION (extends RuntimeException).
  * <p>
- * "Khong tim thay san pham voi id da cho" thuong la dau hieu cua mot LOI LAP
- * TRINH (goi sai id, du lieu khong dong bo) chu khong phai tinh huong nghiep
- * vu binh thuong nguoi goi can xu ly moi lan. Vi vay dung unchecked de khong
- * bat ep moi noi goi phai viet try/catch thua thai.
+ * "Không tìm thấy sản phẩm với id đã cho" thường là dấu hiệu của một LỖI LẬP
+ * TRÌNH (gọi sai id, dữ liệu không đồng bộ) chứ không phải tình huống nghiệp
+ * vụ bình thường người gọi cần xử lý mỗi lần. Vì vậy dùng unchecked để không
+ * bắt ép mọi nơi gọi phải viết try/catch thừa thãi.
  */
 public class ProductNotFoundException extends RuntimeException {
 

@@ -10,13 +10,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * XU LY I/O CO BAN - xuat JSON KHONG dung thu vien ngoai (Gson/Jackson) de
- * giu dung tinh than "Java Core thuan": tu ghep chuoi JSON hop le bang
- * StringBuilder/Stream, roi ghi ra file bang java.nio.file.Files.
+ * XỬ LÝ I/O CƠ BẢN - xuất JSON KHÔNG dùng thư viện ngoài (Gson/Jackson) để
+ * giữ đúng tinh thần "Java Core thuần": tự ghép chuỗi JSON hợp lệ bằng
+ * StringBuilder/Stream, rồi ghi ra file bằng java.nio.file.Files.
  * <p>
- * Trong du an thuc te (Java FullStack sau nay) ban se dung Jackson/Gson thay
- * vi tu viet nhu the nay - o day muc dich la HIEU BAN CHAT cua serialization,
- * khong phai khuyen khich tu viet JSON writer cho production.
+ * Trong dự án thực tế (Java FullStack sau này) bạn sẽ dùng Jackson/Gson thay
+ * vì tự viết như thế này - ở đây mục đích là HIỂU BẢN CHẤT của serialization,
+ * không phải khuyến khích tự viết JSON writer cho production.
  */
 public class JsonExporter {
 

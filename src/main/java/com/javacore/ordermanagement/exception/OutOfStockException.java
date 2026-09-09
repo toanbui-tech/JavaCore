@@ -1,12 +1,12 @@
 package com.javacore.ordermanagement.exception;
 
 /**
- * CHECKED EXCEPTION (extends Exception, khong phai RuntimeException).
+ * CHECKED EXCEPTION (extends Exception, không phải RuntimeException).
  * <p>
- * Het hang la mot loi NGHIEP VU co the du doan truoc va nguoi goi nen bat
- * buoc phai xu ly (vi du: goi lai voi so luong khac, thong bao cho khach,
- * huy don...). Trinh bien dich se bat loi neu ham goi Product.reduceStock()
- * ma khong bat (try/catch) hoac khai bao "throws OutOfStockException".
+ * Hết hàng là một lỗi NGHIỆP VỤ có thể dự đoán trước và người gọi nên bắt
+ * buộc phải xử lý (ví dụ: gọi lại với số lượng khác, thông báo cho khách,
+ * hủy đơn...). Trình biên dịch sẽ bắt lỗi nếu hàm gọi Product.reduceStock()
+ * mà không bắt (try/catch) hoặc khai báo "throws OutOfStockException".
  */
 public class OutOfStockException extends Exception {
 

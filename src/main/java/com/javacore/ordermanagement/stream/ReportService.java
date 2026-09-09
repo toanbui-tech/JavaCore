@@ -14,18 +14,18 @@ import java.util.stream.Collectors;
 /**
  * JAVA STREAM API & LAMBDA EXPRESSION.
  * <p>
- * Thay vi viet vong for/if long dong de tinh toan/thong ke thu cong, Stream
- * API mo ta "CAI GI can lam" (filter, map, group, reduce...) thay vi "LAM
- * THE NAO" (khai bao bien tam, tang chi so...) - code ngan gon, khai bao
- * (declarative) va de doc hon.
+ * Thay vì viết vòng for/if lồng dòng để tính toán/thống kê thủ công, Stream
+ * API mô tả "CÁI GÌ cần làm" (filter, map, group, reduce...) thay vì "LÀM
+ * THẾ NÀO" (khai báo biến tạm, tăng chỉ số...) - code ngắn gọn, khai báo
+ * (declarative) và dễ đọc hơn.
  * <p>
- * Luu y: cac phuong thuc o day KHONG thay doi (immutable) danh sach dau vao,
- * chi doc va tra ve ket qua moi - dung tinh chat "khong tac dung phu" ma
- * Stream khuyen khich.
+ * Lưu ý: các phương thức ở đây KHÔNG thay đổi (immutable) danh sách đầu vào,
+ * chỉ đọc và trả về kết quả mới - đúng tính chất "không tác dụng phụ" mà
+ * Stream khuyến khích.
  */
 public class ReportService {
 
-    /** Tong doanh thu = tong Order#getTotal() cua cac don da hoan tat (khong tinh don huy). */
+    /** Tổng doanh thu = tổng Order#getTotal() của các đơn đã hoàn tất (không tính đơn hủy). */
     public BigDecimal totalRevenue(List<Order> orders) {
         return orders.stream()
                 .filter(order -> order.getStatus() != OrderStatus.CANCELLED)
@@ -33,13 +33,13 @@ public class ReportService {
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 
-    /** Gom nhom don hang theo trang thai - Map<OrderStatus, List<Order>>. */
+    /** Gom nhóm đơn hàng theo trạng thái - Map<OrderStatus, List<Order>>. */
     public Map<OrderStatus, List<Order>> groupOrdersByStatus(List<Order> orders) {
         return orders.stream()
                 .collect(Collectors.groupingBy(Order::getStatus));
     }
 
-    /** Doanh thu theo tung khach hang (ten khach -> tong tien da chi, cac don da huy khong tinh). */
+    /** Doanh thu theo từng khách hàng (tên khách -> tổng tiền đã chi, các đơn đã hủy không tính). */
     public Map<String, BigDecimal> revenueByCustomerName(List<Order> orders) {
         return orders.stream()
                 .filter(order -> order.getStatus() != OrderStatus.CANCELLED)
@@ -48,7 +48,7 @@ public class ReportService {
                         Collectors.reducing(BigDecimal.ZERO, Order::getTotal, BigDecimal::add)));
     }
 
-    /** Top N san pham ban chay nhat theo tong SO LUONG da ban, sap xep giam dan. */
+    /** Top N sản phẩm bán chạy nhất theo tổng SỐ LƯỢNG đã bán, sắp xếp giảm dần. */
     public List<Map.Entry<Product, Long>> topSellingProducts(List<Order> orders, int topN) {
         Map<Product, Long> soldQuantityByProduct = orders.stream()
                 .filter(order -> order.getStatus() != OrderStatus.CANCELLED)
@@ -61,7 +61,7 @@ public class ReportService {
                 .toList();
     }
 
-    /** Gia tri trung binh moi don hang (khong tinh don huy). */
+    /** Giá trị trung bình mỗi đơn hàng (không tính đơn hủy). */
     public BigDecimal averageOrderValue(List<Order> orders) {
         List<Order> validOrders = orders.stream()
                 .filter(order -> order.getStatus() != OrderStatus.CANCELLED)
@@ -73,7 +73,7 @@ public class ReportService {
         return total.divide(BigDecimal.valueOf(validOrders.size()), 2, java.math.RoundingMode.HALF_UP);
     }
 
-    /** Danh sach don hang co gia tri lon nhat, sap xep giam dan - vi du dung Comparator + lambda. */
+    /** Danh sách đơn hàng có giá trị lớn nhất, sắp xếp giảm dần - ví dụ dùng Comparator + lambda. */
     public List<Order> topOrdersByValue(List<Order> orders, int topN) {
         return orders.stream()
                 .sorted(Comparator.comparing(Order::getTotal).reversed())

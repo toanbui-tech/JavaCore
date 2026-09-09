@@ -1,10 +1,10 @@
 package com.javacore.ordermanagement.oop;
 
 /**
- * ENUM: tap gia tri huu han va an toan kieu (type-safe) cho trang thai don
- * hang. Dung enum thay vi String("PENDING", "pending", "Pending"...) giup
- * trinh bien dich bat loi go sai chinh ta va cho phep dung switch de xu ly
- * day du tung truong hop.
+ * ENUM: tập giá trị hữu hạn và an toàn kiểu (type-safe) cho trạng thái đơn
+ * hàng. Dùng enum thay vì String("PENDING", "pending", "Pending"...) giúp
+ * trình biên dịch bắt lỗi gõ sai chính tả và cho phép dùng switch để xử lý
+ * đầy đủ từng trường hợp.
  */
 public enum OrderStatus {
     PENDING,

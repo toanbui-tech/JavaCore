@@ -6,13 +6,13 @@ import java.util.Objects;
 /**
  * ABSTRACT CLASS + ENCAPSULATION.
  * <p>
- * Customer la "khuon" chung cho moi loai khach hang. No khong the bi khoi tao
- * truc tiep (new Customer(...) la loi bien dich) vi mot khach hang trong thuc
- * te luon phai thuoc mot hang (Regular/VIP...) cu the.
+ * Customer là "khuôn" chung cho mọi loại khách hàng. Nó không thể bị khởi tạo
+ * trực tiếp (new Customer(...) là lỗi biên dịch) vì một khách hàng trong thực
+ * tế luôn phải thuộc một hạng (Regular/VIP...) cụ thể.
  * <p>
- * Cac field duoc khai bao private va chi lo ra ngoai qua getter -> day la
- * ENCAPSULATION: an chi tiet cai dat, chi cho phep truy cap/thay doi trang
- * thai thong qua cac phuong thuc duoc kiem soat.
+ * Các field được khai báo private và chỉ lộ ra ngoài qua getter -> đây là
+ * ENCAPSULATION: ẩn chi tiết cài đặt, chỉ cho phép truy cập/thay đổi trạng
+ * thái thông qua các phương thức được kiểm soát.
  */
 public abstract class Customer {
 
@@ -41,17 +41,17 @@ public abstract class Customer {
     /**
      * ABSTRACTION + POLYMORPHISM (runtime binding).
      * <p>
-     * Moi loai khach hang tinh muc giam gia khac nhau. OrderService chi goi
-     * customer.calculateDiscount(...) ma khong can biet cu the la
-     * RegularCustomer hay VipCustomer - JVM se tu chon phien ban phu hop luc
-     * chay chuong trinh (dynamic dispatch).
-     * Hãy dùng Abstract Class khi 
+     * Mỗi loại khách hàng tính mức giảm giá khác nhau. OrderService chỉ gọi
+     * customer.calculateDiscount(...) mà không cần biết cụ thể là
+     * RegularCustomer hay VipCustomer - JVM sẽ tự chọn phiên bản phù hợp lúc
+     * chạy chương trình (dynamic dispatch).
+     * Hãy dùng Abstract Class khi
      * các lớp con của bạn có chung một nguồn gốc bản chất 
      * và bạn muốn tái sử dụng code để tránh lặp lại chính mình (DRY - Don't Repeat Yourself).
      */
     public abstract BigDecimal calculateDiscount(BigDecimal orderTotal);
 
-    /** Ten hang khach hang, dung de hien thi/bao cao. */
+    /** Tên hạng khách hàng, dùng để hiển thị/báo cáo. */
     public abstract String getMembershipTier();
 
     @Override

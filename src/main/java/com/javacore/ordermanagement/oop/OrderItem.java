@@ -4,9 +4,9 @@ import java.math.BigDecimal;
 import java.util.Objects;
 
 /**
- * OrderItem la mot "value object" nho: gan mot Product voi so luong duoc mua
- * trong mot don hang cu the. Tach rieng khoi Product de gia tai thoi diem mua
- * (khong bi anh huong neu sau nay Product doi gia) co the duoc luu lai.
+ * OrderItem là một "value object" nhỏ: gắn một Product với số lượng được mua
+ * trong một đơn hàng cụ thể. Tách riêng khỏi Product để giá tại thời điểm mua
+ * (không bị ảnh hưởng nếu sau này Product đổi giá) có thể được lưu lại.
  */
 public class OrderItem {
 

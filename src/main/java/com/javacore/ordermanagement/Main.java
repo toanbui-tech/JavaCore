@@ -31,17 +31,17 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * DIEM VAO CHUONG TRINH: chay tuan tu qua toan bo he thong Quan ly don hang
- * de minh hoa moi khai niem Java Core lam viec CUNG NHAU trong mot bo canh
- * thuc te, thay vi cac vi du roi rac.
+ * ĐIỂM VÀO CHƯƠNG TRÌNH: chạy tuần tự qua toàn bộ hệ thống Quản lý đơn hàng
+ * để minh họa mọi khái niệm Java Core làm việc CÙNG NHAU trong một bối cảnh
+ * thực tế, thay vì các ví dụ rời rạc.
  * <p>
- * Neu ban moi doc project nay lan dau, xem README.md o thu muc goc de biet
- * lo trinh nen doc/code theo thu tu nao.
+ * Nếu bạn mới đọc project này lần đầu, xem README.md ở thư mục gốc để biết
+ * lộ trình nên đọc/code theo thứ tự nào.
  */
 public class Main {
 
     public static void main(String[] args) throws IOException {
-        // 1) Khoi tao ha tang: repository (generics) + collections chuyen biet
+        // 1) Khởi tạo hạ tầng: repository (generics) + collections chuyên biệt
         ProductRepository productRepository = new ProductRepository();
         CustomerRepository customerRepository = new CustomerRepository();
         OrderRepository orderRepository = new OrderRepository();
@@ -51,7 +51,7 @@ public class Main {
         ReportService reportService = new ReportService();
         NotificationSender notificationSender = new NotificationSender();
 
-        // 2) Du lieu mau: san pham
+        // 2) Dữ liệu mẫu: sản phẩm
         Product laptop = new Product("P1", "Laptop Pro 14", "Electronics", new BigDecimal("1500.00"), 5);
         Product mouse = new Product("P2", "Wireless Mouse", "Electronics", new BigDecimal("25.00"), 2);
         Product desk = new Product("P3", "Standing Desk", "Furniture", new BigDecimal("300.00"), 10);
@@ -61,11 +61,11 @@ public class Main {
         }
         System.out.println("Danh muc san pham: " + catalog.getCategories());
 
-        // 3) Du lieu mau: khach hang - RegularCustomer/VipCustomer minh hoa da hinh
+        // 3) Dữ liệu mẫu: khách hàng - RegularCustomer/VipCustomer minh họa đa hình
         Customer alice = customerRepository.save(new VipCustomer("C1", "Alice", "alice@example.com"));
         Customer bob = customerRepository.save(new RegularCustomer("C2", "Bob", "bob@example.com"));
 
-        // 4) Dat hang - minh hoa CHECKED EXCEPTION (OutOfStockException) phai duoc xu ly
+        // 4) Đặt hàng - minh họa CHECKED EXCEPTION (OutOfStockException) phải được xử lý
         try {
             Order aliceOrder = orderService.placeOrder(alice.getId(), Map.of(laptop.getId(), 1, mouse.getId(), 1));
             System.out.println("Da tao don hang: " + aliceOrder);
@@ -74,7 +74,7 @@ public class Main {
         }
 
         try {
-            // Bob mua 5 con chuot trong khi kho chi con 1 -> se nem OutOfStockException
+            // Bob mua 5 con chuột trong khi kho chỉ còn 1 -> sẽ ném OutOfStockException
             orderService.placeOrder(bob.getId(), Map.of(mouse.getId(), 5));
         } catch (OutOfStockException e) {
             System.out.println("Bat duoc loi nghiep vu du kien: " + e.getMessage());
@@ -87,7 +87,7 @@ public class Main {
             System.out.println("Khong the dat hang: " + e.getMessage());
         }
 
-        // 5) Xu ly hang doi uu tien: don cua VIP (Alice) duoc xu ly truoc don cua Bob
+        // 5) Xử lý hàng đợi ưu tiên: đơn của VIP (Alice) được xử lý trước đơn của Bob
         System.out.println("\n-- Xu ly hang doi uu tien (VIP truoc) --");
         PaymentMethod cash = new CashPayment();
         Order processed;
@@ -97,14 +97,14 @@ public class Main {
                     "Don hang " + processed.getId() + " da duoc giao cho don vi van chuyen.");
         }
 
-        // 6) Minh hoa UNCHECKED EXCEPTION: huy mot don khong ton tai
+        // 6) Minh họa UNCHECKED EXCEPTION: hủy một đơn không tồn tại
         try {
             orderService.cancelOrder("khong-ton-tai");
         } catch (InvalidOrderException e) {
             System.out.println("\nBat duoc loi du kien: " + e.getMessage());
         }
 
-        // 7) Bao cao thong ke bang Stream API
+        // 7) Báo cáo thống kê bằng Stream API
         List<Order> allOrders = orderRepository.findAll();
         System.out.println("\n-- Bao cao (Stream API) --");
         System.out.println("Tong doanh thu: " + reportService.totalRevenue(allOrders));
@@ -114,7 +114,7 @@ public class Main {
         reportService.topSellingProducts(allOrders, 3)
                 .forEach(entry -> System.out.printf("  Ban chay: %s - %d san pham%n", entry.getKey().getName(), entry.getValue()));
 
-        // 8) Xu ly da luong: dat them vai don PENDING roi checkout song song bang ExecutorService
+        // 8) Xử lý đa luồng: đặt thêm vài đơn PENDING rồi checkout song song bằng ExecutorService
         System.out.println("\n-- Xu ly hang loat da luong (ExecutorService) --");
         try {
             orderService.placeOrder(alice.getId(), Map.of(laptop.getId(), 1));
@@ -122,7 +122,7 @@ public class Main {
         } catch (OutOfStockException e) {
             System.out.println("Khong the tao don cho demo da luong: " + e.getMessage());
         }
-        // Cac don duoc dat qua placeOrder() da tu dong vao priority queue; lay ra de xu ly song song
+        // Các đơn được đặt qua placeOrder() đã tự động vào priority queue; lấy ra để xử lý song song
         List<Order> toProcess = new ArrayList<>();
         Order next;
         while ((next = queueManager.pollByPriority()) != null) {
@@ -133,7 +133,7 @@ public class Main {
         List<Order> results = batchProcessor.processBatch(toProcess, creditCard, 4);
         results.forEach(order -> System.out.println("Da checkout song song: " + order));
 
-        // 9) Xuat du lieu ra file (I/O)
+        // 9) Xuất dữ liệu ra file (I/O)
         Path outputDir = Path.of("output");
         Files.createDirectories(outputDir);
         new CsvExporter().exportOrders(orderRepository.findAll(), outputDir.resolve("orders.csv"));

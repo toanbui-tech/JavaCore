@@ -48,7 +48,7 @@ class ReportServiceTest {
     void totalRevenue_shouldExcludeCancelledOrders() {
         BigDecimal total = reportService.totalRevenue(List.of(order1, order2, cancelledOrder));
 
-        // order1 = 1000 + 40 = 1040 ; order2 = 20 ; cancelledOrder bi loai ra
+        // order1 = 1000 + 40 = 1040 ; order2 = 20 ; cancelledOrder bị loại ra
         assertEquals(0, new BigDecimal("1060.00").compareTo(total));
     }
 

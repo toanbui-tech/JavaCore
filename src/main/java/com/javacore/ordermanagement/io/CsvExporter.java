@@ -10,16 +10,16 @@ import java.nio.file.Path;
 import java.util.List;
 
 /**
- * XU LY I/O CO BAN - ghi file.
+ * XỬ LÝ I/O CƠ BẢN - ghi file.
  * <p>
- * try-with-resources dam bao BufferedWriter luon duoc dong (close()) du co
- * xay ra ngoai le hay khong - tuong duong voi try/finally thu cong nhung
- * ngan gon va it loi hon (khong the quen goi close()).
+ * try-with-resources đảm bảo BufferedWriter luôn được đóng (close()) dù có
+ * xảy ra ngoại lệ hay không - tương đương với try/finally thủ công nhưng
+ * ngắn gọn và ít lỗi hơn (không thể quên gọi close()).
  * <p>
- * IOException la mot CHECKED EXCEPTION cua chinh JDK (khac voi cac custom
- * exception trong package exception): loi doc/ghi file la loi he thong
- * (disk day, khong co quyen...) hoan toan nam ngoai tam kiem soat cua logic
- * nghiep vu, nen Java bat nguoi goi phai chu dong xu ly hoac khai bao throws.
+ * IOException là một CHECKED EXCEPTION của chính JDK (khác với các custom
+ * exception trong package exception): lỗi đọc/ghi file là lỗi hệ thống
+ * (đĩa đầy, không có quyền...) hoàn toàn nằm ngoài tầm kiểm soát của logic
+ * nghiệp vụ, nên Java bắt người gọi phải chủ động xử lý hoặc khai báo throws.
  */
 public class CsvExporter {
 

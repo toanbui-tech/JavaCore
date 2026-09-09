@@ -2,7 +2,7 @@ package com.javacore.ordermanagement.oop.payment;
 
 import java.math.BigDecimal;
 
-/** Thanh toan the tin dung: gia lap gioi han han muc (credit limit). */
+/** Thanh toán thẻ tín dụng: giả lập giới hạn hạn mức (credit limit). */
 public class CreditCardPayment implements PaymentMethod {
 
     private final String cardNumberMasked;

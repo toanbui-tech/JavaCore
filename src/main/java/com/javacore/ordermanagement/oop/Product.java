@@ -6,11 +6,11 @@ import java.math.BigDecimal;
 import java.util.Objects;
 
 /**
- * ENCAPSULATION: soLuongTon (stockQuantity) khong co public setter. Cach duy
- * nhat de thay doi ton kho tu ben ngoai la qua reduceStock()/restock(), noi
- * ta co the kiem soat rang buoc nghiep vu (khong duoc am, phai bao loi khi
- * khong du hang...). Neu de field public hoac setter tu do, code ben ngoai
- * co the gan gia tri am -> pha vo tinh toan ven du lieu.
+ * ENCAPSULATION: số lượng tồn (stockQuantity) không có public setter. Cách
+ * duy nhất để thay đổi tồn kho từ bên ngoài là qua reduceStock()/restock(),
+ * nơi ta có thể kiểm soát ràng buộc nghiệp vụ (không được âm, phải báo lỗi
+ * khi không đủ hàng...). Nếu để field public hoặc setter tự do, code bên
+ * ngoài có thể gán giá trị âm -> phá vỡ tính toàn vẹn dữ liệu.
  */
 public class Product {
 
@@ -48,16 +48,16 @@ public class Product {
     }
 
     public synchronized int getStockQuantity() {
-        // synchronized: nhieu luong (xem package concurrency) co the ban hang
-        // cung luc, doc/ghi ton kho phai duoc dong bo hoa de tranh sai lech du lieu.
+        // synchronized: nhiều luồng (xem package concurrency) có thể bán hàng
+        // cùng lúc, đọc/ghi tồn kho phải được đồng bộ hóa để tránh sai lệch dữ liệu.
         return stockQuantity;
     }
 
     /**
-     * CHECKED EXCEPTION o tang domain: khong du hang la mot tinh huong nghiep
-     * vu HOAN TOAN CO THE XAY RA va nguoi goi BAT BUOC phai xu ly (bat hoac
-     * khai bao throws) - vi vay OutOfStockException extends Exception chu
-     * khong phai RuntimeException.
+     * CHECKED EXCEPTION ở tầng domain: không đủ hàng là một tình huống nghiệp
+     * vụ HOÀN TOÀN CÓ THỂ XẢY RA và người gọi BẮT BUỘC phải xử lý (bắt hoặc
+     * khai báo throws) - vì vậy OutOfStockException extends Exception chứ
+     * không phải RuntimeException.
      */
     public synchronized void reduceStock(int quantity) throws OutOfStockException {
         if (quantity <= 0) {

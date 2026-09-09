@@ -8,14 +8,14 @@ import java.util.Optional;
 import java.util.function.Function;
 
 /**
- * GENERIC ABSTRACT CLASS: cai dat san phan logic CRUD dung chung cho moi
- * Repository, dua tren Map<ID, T>. Cac lop con (ProductRepository,
- * CustomerRepository...) chi can cung cap ham lay id tu entity - the hien
- * TEMPLATE METHOD don gian ket hop voi generics.
+ * GENERIC ABSTRACT CLASS: cài đặt sẵn phần logic CRUD dùng chung cho mọi
+ * Repository, dựa trên Map<ID, T>. Các lớp con (ProductRepository,
+ * CustomerRepository...) chỉ cần cung cấp hàm lấy id từ entity - thể hiện
+ * TEMPLATE METHOD đơn giản kết hợp với generics.
  * <p>
- * COLLECTIONS: dung LinkedHashMap thay vi HashMap de giu THU TU CHEN
- * (insertion order) khi duyet findAll() - giup ket qua demo/log de doc va
- * on dinh giua cac lan chay.
+ * COLLECTIONS: dùng LinkedHashMap thay vì HashMap để giữ THỨ TỰ CHÈN
+ * (insertion order) khi duyệt findAll() - giúp kết quả demo/log dễ đọc và
+ * ổn định giữa các lần chạy.
  */
 public abstract class AbstractInMemoryRepository<T, ID> implements Repository<T, ID> {
 

@@ -1,6 +1,6 @@
 package com.javacore.ordermanagement.exception;
 
-/** UNCHECKED EXCEPTION - tuong tu ProductNotFoundException nhung cho Customer. */
+/** UNCHECKED EXCEPTION - tương tự ProductNotFoundException nhưng cho Customer. */
 public class CustomerNotFoundException extends RuntimeException {
 
     public CustomerNotFoundException(String customerId) {

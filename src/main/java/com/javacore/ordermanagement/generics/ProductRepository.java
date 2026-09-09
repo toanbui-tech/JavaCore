@@ -7,10 +7,10 @@ import java.util.List;
 public class ProductRepository extends AbstractInMemoryRepository<Product, String> {
 
     public ProductRepository() {
-        super(Product::getId); // method reference: cach AbstractInMemoryRepository lay id tu mot Product
+        super(Product::getId); // method reference: cách AbstractInMemoryRepository lấy id từ một Product
     }
 
-    /** Vi du finder tuy bien them ngoai CRUD co ban, dung Stream API. */
+    /** Ví dụ finder tùy biến thêm ngoài CRUD cơ bản, dùng Stream API. */
     public List<Product> findByCategory(String category) {
         return findAll().stream()
                 .filter(p -> p.getCategory().equalsIgnoreCase(category))

@@ -20,10 +20,10 @@ import java.util.Map;
 import java.util.UUID;
 
 /**
- * TANG SERVICE: noi phoi hop repository (generics), custom exception, va
- * collections lai voi nhau de thuc thi mot NGHIEP VU hoan chinh - dat mua
- * hang. Day la lop "duong dan chinh" (main flow) ma Main.java se goi de
- * chay demo, va cung la lop duoc unit test ky nhat (xem src/test).
+ * TẦNG SERVICE: nơi phối hợp repository (generics), custom exception, và
+ * collections lại với nhau để thực thi một NGHIỆP VỤ hoàn chỉnh - đặt mua
+ * hàng. Đây là lớp "đường dẫn chính" (main flow) mà Main.java sẽ gọi để
+ * chạy demo, và cũng là lớp được unit test kỹ nhất (xem src/test).
  */
 public class OrderService {
 
@@ -43,14 +43,14 @@ public class OrderService {
     }
 
     /**
-     * Dat mot don hang moi.
+     * Đặt một đơn hàng mới.
      *
-     * @param customerId    id khach hang da ton tai
-     * @param quantityByProductId map productId -> so luong muon mua
-     * @throws OutOfStockException        (CHECKED) neu bat ky san pham nao khong du hang
-     * @throws CustomerNotFoundException  (UNCHECKED) neu khong tim thay khach hang
-     * @throws ProductNotFoundException   (UNCHECKED) neu khong tim thay san pham
-     * @throws InvalidOrderException      (UNCHECKED) neu don hang khong co item nao
+     * @param customerId    id khách hàng đã tồn tại
+     * @param quantityByProductId map productId -> số lượng muốn mua
+     * @throws OutOfStockException        (CHECKED) nếu bất kỳ sản phẩm nào không đủ hàng
+     * @throws CustomerNotFoundException  (UNCHECKED) nếu không tìm thấy khách hàng
+     * @throws ProductNotFoundException   (UNCHECKED) nếu không tìm thấy sản phẩm
+     * @throws InvalidOrderException      (UNCHECKED) nếu đơn hàng không có item nào
      */
     public Order placeOrder(String customerId, Map<String, Integer> quantityByProductId) throws OutOfStockException {
         Customer customer = customerRepository.findById(customerId)
@@ -66,9 +66,9 @@ public class OrderService {
             Product product = productRepository.findById(entry.getKey())
                     .orElseThrow(() -> new ProductNotFoundException(entry.getKey()));
 
-            // Checked exception: buoc goi ham nay phai duoc bao boc trong try/catch
-            // hoac lan truyen tiep bang "throws" - o day ta chon lan truyen len Main
-            // de nguoi goi (Main) quyet dinh cach xu ly (thong bao, huy don...).
+            // Checked exception: buộc gọi hàm này phải được bao bọc trong try/catch
+            // hoặc lan truyền tiếp bằng "throws" - ở đây ta chọn lan truyền lên Main
+            // để người gọi (Main) quyết định cách xử lý (thông báo, hủy đơn...).
             product.reduceStock(entry.getValue());
             order.addItem(new OrderItem(product, entry.getValue()));
         }
@@ -78,7 +78,7 @@ public class OrderService {
         return order;
     }
 
-    /** Xu ly don hang tiep theo trong hang doi uu tien (VIP truoc) va tien hanh thanh toan. */
+    /** Xử lý đơn hàng tiếp theo trong hàng đợi ưu tiên (VIP trước) và tiến hành thanh toán. */
     public Order processNextInQueue(PaymentMethod paymentMethod) {
         Order order = queueManager.pollByPriority();
         if (order == null) {
@@ -91,7 +91,7 @@ public class OrderService {
         order.changeStatus(OrderStatus.PROCESSING);
         BigDecimal total = order.getTotal();
 
-        // DA HINH: khong quan tam paymentMethod la Cash/CreditCard/EWallet cu the.
+        // ĐA HÌNH: không quan tâm paymentMethod là Cash/CreditCard/EWallet cụ thể.
         boolean success = paymentMethod.pay(total);
         if (!success) {
             throw new InvalidOrderException(

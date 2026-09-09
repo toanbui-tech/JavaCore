@@ -3,8 +3,8 @@ package com.javacore.ordermanagement.oop;
 import java.math.BigDecimal;
 
 /**
- * KE THUA (inheritance): RegularCustomer "la mot" Customer, thua huong
- * id/name/email va chi phai hien thuc phan rieng cua no (calculateDiscount).
+ * KẾ THỪA (inheritance): RegularCustomer "là một" Customer, thừa hưởng
+ * id/name/email và chỉ phải hiện thực phần riêng của nó (calculateDiscount).
  */
 public class RegularCustomer extends Customer {
 
@@ -16,7 +16,7 @@ public class RegularCustomer extends Customer {
 
     @Override
     public BigDecimal calculateDiscount(BigDecimal orderTotal) {
-        // Khach hang thuong: khong giam gia.
+        // Khách hàng thường: không giảm giá.
         return orderTotal.multiply(DISCOUNT_RATE);
     }
 
