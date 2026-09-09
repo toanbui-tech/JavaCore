@@ -10,6 +10,8 @@ import java.math.BigDecimal;
  * <p>
  * OrderService se cam vao 1 PaymentMethod bat ky (Cash/CreditCard/EWallet)
  * ma khong can biet chi tiet -> DA HINH THONG QUA INTERFACE.
+ * Hãy dùng Interface khi bạn muốn thiết kế một "bản hợp đồng" (Contract) quy định các hành vi, 
+ * bất kể các đối tượng thực thi nó có thuộc cùng một họ hàng hay không.
  */
 public interface PaymentMethod {
 

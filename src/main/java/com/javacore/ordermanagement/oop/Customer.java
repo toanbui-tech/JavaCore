@@ -45,6 +45,9 @@ public abstract class Customer {
      * customer.calculateDiscount(...) ma khong can biet cu the la
      * RegularCustomer hay VipCustomer - JVM se tu chon phien ban phu hop luc
      * chay chuong trinh (dynamic dispatch).
+     * Hãy dùng Abstract Class khi 
+     * các lớp con của bạn có chung một nguồn gốc bản chất 
+     * và bạn muốn tái sử dụng code để tránh lặp lại chính mình (DRY - Don't Repeat Yourself).
      */
     public abstract BigDecimal calculateDiscount(BigDecimal orderTotal);
 
